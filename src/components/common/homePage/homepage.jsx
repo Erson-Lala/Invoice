@@ -1,18 +1,16 @@
 import React from 'react';
 import Header from '../header/header';
 import Footer from '../footer/footer';
+import InvoiceCreation from '../invoiceCreation/invoicecreation';
+import InvoiceList from '../invoiceList/invoicelist';
 import './homepage.scss'; 
+
 
 const HomePage = () => {
   return (
     <div className="homepage">
       <Header />
-      <main className="main-content">
-        <section className="hero">
-          <h1>Welcome to the Invoicing App</h1>
-          <p>Create and manage your invoices with ease.</p>
-        </section>
-      </main>
+      <InvoiceList />
       <Footer />
     </div>
   );

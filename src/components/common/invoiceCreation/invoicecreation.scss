@@ -1,0 +1,23 @@
+.invoice-creation {
+    .customer-info, .invoice-items {
+      margin-bottom: 20px;
+  
+      input {
+        display: block;
+        margin-bottom: 10px;
+        padding: 8px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+    }
+  
+    .item {
+      margin-bottom: 15px;
+    }
+  
+    button {
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+  }
+  
