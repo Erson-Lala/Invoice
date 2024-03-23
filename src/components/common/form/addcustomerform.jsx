@@ -16,9 +16,9 @@ const AddCustomerForm = ({ onSuccess, onError }) => {
     e.preventDefault();
     try {
       await addCustomer(newCustomer);
-      onSuccess(); // Close modal on success
+      onSuccess();
     } catch (error) {
-      onError(error); // Handle error
+      onError(error);
     }
   };
 
