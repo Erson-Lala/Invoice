@@ -1,17 +1,17 @@
 .header {
     background-color: #007bff;
-    padding: 16px 0;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
-    position: sticky;
-    top: 0;
   
     .container {
-      max-width: 1140px;
       margin: 0 auto;
-      padding: 0 15px;
+      padding: 0 5px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
+  }
+
+  h1{
+    color: white;
+    margin: 15px 15px;
   }
   

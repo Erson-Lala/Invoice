@@ -1,0 +1,43 @@
+.invoice-list {
+    overflow-x: auto; /* Enables horizontal scrolling */
+    margin: 20px 10px;
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px; /* Minimum table width */
+  
+      thead {
+        tr {
+          background-color: #007bff;
+          color: #ffffff;
+  
+          th {
+            padding: 10px;
+            font-size: 16px;
+            text-align: left;
+          }
+        }
+      }
+  
+      tbody {
+        tr {
+          border-bottom: 1px solid #dddddd;
+  
+          &:nth-child(even) {
+            background-color: #f2f2f2;
+          }
+  
+          td {
+            padding: 10px;
+            font-size: 14px;
+          }
+        }
+  
+        tr:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+  

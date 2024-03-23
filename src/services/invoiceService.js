@@ -20,3 +20,13 @@ export const fetchInvoiceById = async (invoiceId) => {
   }
 };
 
+export const addCustomer = async (customerData) => {
+  try {
+    const response = await apiInstance.post('/api/customers', customerData);
+    return response.data;
+  } catch (error) {
+    console.error("Error adding customer:", error);
+    throw error;
+  }
+};
+

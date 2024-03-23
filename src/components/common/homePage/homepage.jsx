@@ -10,6 +10,7 @@ const HomePage = () => {
   return (
     <div className="homepage">
       <Header />
+      <InvoiceCreation />
       <InvoiceList />
       <Footer />
     </div>

@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { fetchInvoices } from '../../../services/invoiceService'; // Ensure this path matches your project structure
+import { fetchInvoices } from '../../../services/invoiceService';
+import './invoicelist.scss';
 
 const InvoiceList = () => {
   const [invoices, setInvoices] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null); // Added for improved error handling
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const loadInvoices = async () => {
       setIsLoading(true);
-      setError(null); // Reset error state on new loading attempt
+      setError(null);
       try {
         const data = await fetchInvoices();
         setInvoices(data);
       } catch (err) {
         console.error("Failed to fetch invoices:", err);
-        setError('Failed to load invoices. Please try again.'); // Set a user-friendly error message
+        setError('Failed to load invoices. Please try again.');
       } finally {
         setIsLoading(false);
       }
@@ -25,11 +26,11 @@ const InvoiceList = () => {
   }, []);
 
   return (
-    <div>
+    <div className="invoice-list">
       {isLoading ? (
         <p>Loading invoices...</p>
       ) : error ? (
-        <div style={{ color: 'red' }}>{error}</div> // Display error message
+        <div style={{ color: 'red' }}>{error}</div>
       ) : invoices.length > 0 ? (
         <table>
           <thead>
@@ -45,10 +46,10 @@ const InvoiceList = () => {
             {invoices.map(invoice => (
               <tr key={invoice.id}>
                 <td>{invoice.invoiceNumber}</td>
-                <td>{new Date(invoice.invoiceDate).toLocaleDateString()}</td> {/* Formatting the date */}
+                <td>{new Date(invoice.invoiceDate).toLocaleDateString()}</td>
                 <td>{invoice.customerId}</td>
-                <td>${invoice.totalAmount.toFixed(2)}</td> {/* Formatting the amount as currency */}
-                <td>{invoice.isPaid ? 'Paid' : 'Pending'}</td> {/* Adding a simple status */}
+                <td>${invoice.totalAmount.toFixed(2)}</td>
+                <td>{invoice.isPaid ? 'Paid' : 'Pending'}</td>
               </tr>
             ))}
           </tbody>
