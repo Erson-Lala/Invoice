@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Modal from '../modal/modal';
-import AddInvoiceForm from '../form/addinvoiceform';
-import './invoicecreation.scss';
+import AddCustomerForm from '../form/addcustomerform';
+import './customercreation.scss';
 
-const InvoiceCreation = () => {
+const CustomerCreation = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleModalOpen = () => {
@@ -16,14 +16,14 @@ const InvoiceCreation = () => {
 
   return (
     <div className="invoice-creation">
-      <button className="btn" onClick={handleModalOpen}>Create New Invoice</button>
+      <button className="btn" onClick={handleModalOpen}>Add New Customer</button>
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={handleModalClose}>
-          <AddInvoiceForm
+          <AddCustomerForm
             onSuccess={handleModalClose}
             onError={(error) => {
-              console.error("Error creating invoice:", error);
-              alert('Failed to create invoice.');
+              console.error("Error adding new customer:", error);
+              alert('Failed to add new customer.');
             }}
           />
         </Modal>
@@ -32,4 +32,4 @@ const InvoiceCreation = () => {
   );
 };
 
-export default InvoiceCreation;
+export default CustomerCreation;

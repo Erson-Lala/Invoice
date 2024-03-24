@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { addCustomer } from '../../../services/invoiceService';
+import { addCustomer } from '../../../services/customerService';
 import './addcustomerform.scss';
 
 const AddCustomerForm = ({ onSuccess, onError }) => {

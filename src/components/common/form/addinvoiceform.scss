@@ -1,0 +1,62 @@
+.add-invoice-form {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  
+    input, select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      width: 100%; // Ensure inputs take up full width
+  
+      &:focus {
+        outline: none;
+        border-color: #007bff;
+      }
+    }
+  
+    .line-item {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap; // Allow items to wrap on smaller screens
+  
+      .line-item-field {
+        flex: 1; // Allow line item fields to grow and fill available space
+  
+        // Responsive adjustments for smaller screens
+        @media (max-width: 600px) {
+          flex-basis: 100%; // Make line item fields take full width on smaller screens
+        }
+      }
+    }
+  
+    .btn {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+  
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  
+    .add-line-item-btn {
+      margin-top: 10px;
+      background-color: #28a745; // A green color for the "Add Line Item" button
+  
+      &:hover {
+        background-color: darken(#28a745, 10%);
+      }
+    }
+  }
+  

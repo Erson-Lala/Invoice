@@ -1,43 +1,102 @@
 .invoice-list {
-    overflow-x: auto; /* Enables horizontal scrolling */
-    margin: 20px 10px;
-  
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 600px; /* Minimum table width */
-  
-      thead {
-        tr {
-          background-color: #007bff;
-          color: #ffffff;
-  
-          th {
-            padding: 10px;
-            font-size: 16px;
-            text-align: left;
-          }
-        }
+  overflow-x: auto; /* Enables horizontal scrolling */
+  margin: 20px 10px;
+
+  .top-section {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .invoice-creation, .customer-total-form {
+      flex: 1;
+    }
+  }
+
+  .customer-total-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    
+    input {
+      padding: 8px;
+      margin-right: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+
+      &:focus {
+        outline: none;
+        border-color: #007bff;
       }
-  
-      tbody {
-        tr {
-          border-bottom: 1px solid #dddddd;
-  
-          &:nth-child(even) {
-            background-color: #f2f2f2;
-          }
-  
-          td {
-            padding: 10px;
-            font-size: 14px;
-          }
-        }
-  
-        tr:last-child {
-          border-bottom: none;
-        }
+    }
+
+    button {
+      padding: 8px 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      font-size: 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: darken(#007bff, 10%);
+      }
+
+      &:focus {
+        outline: none;
       }
     }
   }
-  
+
+  .total-amount, .no-customer-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px; /* Minimum table width */
+
+    thead {
+      tr {
+        background-color: #007bff;
+        color: #ffffff;
+
+        th {
+          padding: 10px;
+          font-size: 16px;
+          text-align: left;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid #dddddd;
+
+        &:nth-child(even) {
+          background-color: #f2f2f2;
+        }
+
+        td {
+          padding: 10px;
+          font-size: 14px;
+        }
+      }
+
+      tr:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+}

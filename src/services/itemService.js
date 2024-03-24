@@ -2,7 +2,7 @@ import apiInstance from './apiConfig';
 
 export const fetchItems = async () => {
   try {
-    const response = await apiInstance.get('/api/items');
+    const response = await apiInstance.get('/api/Items');
     return response.data;
   } catch (error) {
     console.error("Error fetching items:", error);
@@ -12,7 +12,7 @@ export const fetchItems = async () => {
 
 export const createItem = async (itemData) => {
   try {
-    const response = await apiInstance.post('/api/items', itemData);
+    const response = await apiInstance.post('/api/Items', itemData);
     return response.data;
   } catch (error) {
     console.error("Error creating item:", error);
@@ -22,7 +22,7 @@ export const createItem = async (itemData) => {
 
 export const updateItem = async (id, itemData) => {
   try {
-    const response = await apiInstance.put(`/api/items/${id}`, itemData);
+    const response = await apiInstance.put(`/api/Items/${id}`, itemData);
     return response.data;
   } catch (error) {
     console.error(`Error updating item with ID ${id}:`, error);

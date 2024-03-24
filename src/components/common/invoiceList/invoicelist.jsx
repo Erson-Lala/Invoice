@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { fetchInvoices } from '../../../services/invoiceService';
 import './invoicelist.scss';
+import InvoiceCreation from '../invoiceCreation/invoicecreation';
+import CustomerCreation from '../customerCreation/customercreation';
 
 const InvoiceList = () => {
   const [invoices, setInvoices] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [customerId, setCustomerId] = useState('');
+  const [customerTotal, setCustomerTotal] = useState(0);
+  const [noCustomerFound, setNoCustomerFound] = useState(false);
 
   useEffect(() => {
     const loadInvoices = async () => {
@@ -25,8 +30,46 @@ const InvoiceList = () => {
     loadInvoices();
   }, []);
 
+  const handleCustomerTotal = () => {
+    const filteredInvoices = invoices.filter(invoice => invoice.customerId === parseInt(customerId));
+    if (filteredInvoices.length === 0) {
+      setNoCustomerFound(true);
+      setCustomerTotal(0);
+    } else {
+      const total = filteredInvoices.reduce((acc, curr) => acc + curr.totalAmount, 0);
+      setCustomerTotal(total);
+      setNoCustomerFound(false);
+    }
+  };
+
   return (
     <div className="invoice-list">
+      <div className="top-section">
+        <InvoiceCreation />
+        <div className="customer-total-form">
+          <input
+            type="number"
+            placeholder="Enter Customer ID"
+            value={customerId}
+            onChange={(e) => setCustomerId(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                handleCustomerTotal();
+              }
+            }}
+          />
+          <button onClick={handleCustomerTotal}>Calculate Total</button>
+        </div>
+
+        <CustomerCreation />
+      </div>
+      {noCustomerFound ? (
+        <div className="no-customer-message">No customer found</div>
+      ) : (
+        <div className="total-amount">Total Amount for Customer ID {customerId}: ${customerTotal.toFixed(2)}</div>
+      )}
+
       {isLoading ? (
         <p>Loading invoices...</p>
       ) : error ? (

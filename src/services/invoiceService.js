@@ -20,12 +20,12 @@ export const fetchInvoiceById = async (invoiceId) => {
   }
 };
 
-export const addCustomer = async (customerData) => {
+export const addInvoice = async (invoiceData) => {
   try {
-    const response = await apiInstance.post('/api/customers', customerData);
+    const response = await apiInstance.post('/api/Invoices', invoiceData);
     return response.data;
   } catch (error) {
-    console.error("Error adding customer:", error);
+    console.error("Error creating invoice:", error);
     throw error;
   }
 };
