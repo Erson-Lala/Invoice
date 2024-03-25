@@ -82,16 +82,37 @@ const AddInvoiceForm = ({ onSuccess, onError }) => {
 
   return (
     <form onSubmit={handleAddInvoice} className="add-invoice-form">
-      <input type="text" name="invoiceNumber" placeholder="Invoice Number" value={newInvoice.invoiceNumber} onChange={handleChange} required />
-      <input type="date" name="invoiceDate" value={newInvoice.invoiceDate} onChange={handleChange} required />
-      <input type="number" name="customerId" placeholder="Customer ID" value={newInvoice.customerId} onChange={handleChange} required />
+      <label>
+        Invoice Number:
+        <input type="text" name="invoiceNumber" placeholder="Invoice Number" value={newInvoice.invoiceNumber} onChange={handleChange} required />
+      </label>
+      <label>
+        Invoice Date:
+        <input type="date" name="invoiceDate" value={newInvoice.invoiceDate} onChange={handleChange} required />
+      </label>
+      <label>
+        Customer ID:
+        <input type="number" name="customerId" placeholder="Customer ID" value={newInvoice.customerId} onChange={handleChange} required />
+      </label>
 
       {newInvoice.invoiceLines.map((line, index) => (
         <div key={index}>
-          <input type="number" name="itemId" placeholder="Item ID" value={line.itemId} onChange={(e) => handleInvoiceLineChange(index, e)} required />
-          <input type="number" step="0.01" name="vatRate" placeholder="VAT Rate" value={line.vatRate} onChange={(e) => handleInvoiceLineChange(index, e)} required />
-          <input type="number" step="1" name="quantity" placeholder="Quantity" value={line.quantity} onChange={(e) => handleInvoiceLineChange(index, e)} min="1" required />
-          <input type="number" step="0.01" name="unitPrice" placeholder="Unit Price" value={line.unitPrice} onChange={(e) => handleInvoiceLineChange(index, e)} min="0.01" required />
+          <label>
+            Item ID:
+            <input type="number" name="itemId" placeholder="Item ID" value={line.itemId} onChange={(e) => handleInvoiceLineChange(index, e)} required />
+          </label>
+          <label>
+            VAT Rate:
+            <input type="number" step="0.01" name="vatRate" placeholder="VAT Rate" value={line.vatRate} onChange={(e) => handleInvoiceLineChange(index, e)} required />
+          </label>
+          <label>
+            Quantity:
+            <input type="number" step="1" name="quantity" placeholder="Quantity" value={line.quantity} onChange={(e) => handleInvoiceLineChange(index, e)} min="1" required />
+          </label>
+          <label>
+            Unit Price:
+            <input type="number" step="0.01" name="unitPrice" placeholder="Unit Price" value={line.unitPrice} onChange={(e) => handleInvoiceLineChange(index, e)} min="0.01" required />
+          </label>
         </div>
       ))}
 
