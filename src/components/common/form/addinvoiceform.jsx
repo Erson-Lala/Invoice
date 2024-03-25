@@ -7,16 +7,22 @@ const AddInvoiceForm = ({ onSuccess, onError }) => {
     invoiceDate: '',
     invoiceNumber: '',
     customerId: 0,
-    totalAmount: 0.0,
-    totalVatAmount: 0.0,
-    totalDiscountAmount: 0.0,
-    isPaid: false,
+    user: 'User Name',
     invoiceLines: [{
-      itemId: 0,
-      itemType: 0,
-      vatRate: 0.0,
-      quantity: 0.0,
-      unitPrice: 0.0,
+      itemId: 1,
+      itemName: 'Item Name',
+      itemCode: 'ITEM123',
+      vatRate: 0.2,
+      quantity: 1,
+      uom: 'Unit',
+      unitPrice: 0.01,
+      lineTotal: 0,
+      discountPercent: 0,
+      discountTotalAmount: 0,
+      totalAfterDiscount: 0,
+      notes: '',
+      taxAmount: 0,
+      totalIncludingTax: 0
     }]
   });
 
@@ -30,7 +36,7 @@ const AddInvoiceForm = ({ onSuccess, onError }) => {
     const { name, value } = e.target;
     const updatedInvoiceLines = newInvoice.invoiceLines.map((line, i) => {
       if (i === index) {
-        return { ...line, [name]: name === 'itemType' ? parseInt(value, 10) : parseFloat(value) };
+        return { ...line, [name]: parseFloat(value) };
       }
       return line;
     });
@@ -42,7 +48,22 @@ const AddInvoiceForm = ({ onSuccess, onError }) => {
       ...newInvoice,
       invoiceLines: [
         ...newInvoice.invoiceLines,
-        { itemId: 0, itemType: 0, vatRate: 0.0, quantity: 0.0, unitPrice: 0.0 }
+        {
+          itemId: 1,
+          itemName: 'Item Name',
+          itemCode: 'ITEM123',
+          vatRate: 0.2,
+          quantity: 1,
+          uom: 'Unit',
+          unitPrice: 0.01,
+          lineTotal: 0,
+          discountPercent: 0,
+          discountTotalAmount: 0,
+          totalAfterDiscount: 0,
+          notes: '',
+          taxAmount: 0,
+          totalIncludingTax: 0
+        }
       ]
     });
   };
@@ -51,31 +72,26 @@ const AddInvoiceForm = ({ onSuccess, onError }) => {
     e.preventDefault();
     try {
       await addInvoice(newInvoice);
+      alert('Invoice created successfully!');
       onSuccess();
     } catch (error) {
       onError(error);
+      alert(`Failed to create invoice: ${error.message}`);
     }
   };
-
 
   return (
     <form onSubmit={handleAddInvoice} className="add-invoice-form">
       <input type="text" name="invoiceNumber" placeholder="Invoice Number" value={newInvoice.invoiceNumber} onChange={handleChange} required />
       <input type="date" name="invoiceDate" value={newInvoice.invoiceDate} onChange={handleChange} required />
       <input type="number" name="customerId" placeholder="Customer ID" value={newInvoice.customerId} onChange={handleChange} required />
-      <input type="number" step="0.01" name="totalAmount" placeholder="Total Amount" value={newInvoice.totalAmount} onChange={handleChange} required />
-      <input type="number" step="0.01" name="totalVatAmount" placeholder="Total VAT Amount" value={newInvoice.totalVatAmount} onChange={handleChange} required />
-      <input type="number" step="0.01" name="totalDiscountAmount" placeholder="Total Discount Amount" value={newInvoice.totalDiscountAmount} onChange={handleChange} required />
-      <div>
-        <input type="checkbox" name="isPaid" checked={newInvoice.isPaid} onChange={handleChange} /> Paid
-      </div>
-      
+
       {newInvoice.invoiceLines.map((line, index) => (
         <div key={index}>
           <input type="number" name="itemId" placeholder="Item ID" value={line.itemId} onChange={(e) => handleInvoiceLineChange(index, e)} required />
           <input type="number" step="0.01" name="vatRate" placeholder="VAT Rate" value={line.vatRate} onChange={(e) => handleInvoiceLineChange(index, e)} required />
-          <input type="number" step="0.01" name="quantity" placeholder="Quantity" value={line.quantity} onChange={(e) => handleInvoiceLineChange(index, e)} required />
-          <input type="number" step="0.01" name="unitPrice" placeholder="Unit Price" value={line.unitPrice} onChange={(e) => handleInvoiceLineChange(index, e)} required />
+          <input type="number" step="1" name="quantity" placeholder="Quantity" value={line.quantity} onChange={(e) => handleInvoiceLineChange(index, e)} min="1" required />
+          <input type="number" step="0.01" name="unitPrice" placeholder="Unit Price" value={line.unitPrice} onChange={(e) => handleInvoiceLineChange(index, e)} min="0.01" required />
         </div>
       ))}
 
