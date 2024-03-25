@@ -1,69 +1,123 @@
 import React, { useState } from 'react';
 import './itemform.scss';
 
-const ItemForm = ({ item, onSubmit }) => {
+const ItemForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
-    name: item?.name || '',
-    code: item?.code || '',
-    price: item?.price || 0,
-    description: item?.description || '',
-    itemType: item?.itemType || 0,
-    vatRate: item?.vatRate || 0,
-    weight: item?.weight || 0,
-    length: item?.length || 0,
-    width: item?.width || 0,
-    height: item?.height || 0,
-    sku: item?.sku || '',
-    barcode: item?.barcode || '',
-    manufacturer: item?.manufacturer || '',
-    brand: item?.brand || '',
-    model: item?.model || '',
-    color: item?.color || '',
-    size: item?.size || '',
-    material: item?.material || '',
-    countryOfOrigin: item?.countryOfOrigin || '',
-    warranty: item?.warranty || '',
-    supplier: item?.supplier || '',
-    uom: item?.uom || ''
+    name: '',
+    code: '',
+    price: 10.99,
+    itemType: 1,
+    vatRate: 0.15,
+    uom: 'Unit',
   });
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+
+
+    if (name === 'code') {
+      if (value.length < 2) {
+        setErrors({ ...errors, code: 'Code must be at least 2 characters long.' });
+      } else {
+
+        const newErrors = { ...errors };
+        delete newErrors.code;
+        setErrors(newErrors);
+      }
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);
+
+
+    if (Object.keys(errors).length === 0) {
+      onSubmit(formData);
+      alert('Operation successful');
+
+    } else {
+      alert('Please correct the errors before submitting.');
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="item-form">
-      <input
-        type="text"
-        name="name"
-        placeholder="Name"
-        value={formData.name}
-        onChange={handleChange}
-        required
-      />
-      <input
-        type="text"
-        name="code"
-        placeholder="Code"
-        value={formData.code}
-        onChange={handleChange}
-        required
-      />
-      <input
-        type="number"
-        name="price"
-        placeholder="Price"
-        value={formData.price}
-        onChange={handleChange}
-        required
-      />
-      <button type="submit" className="btn">Submit</button>
+      <label>
+        Name:
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+      </label>
+
+      <label>
+        Code:
+        <input
+          type="text"
+          name="code"
+          placeholder="Code"
+          value={formData.code}
+          onChange={handleChange}
+          maxLength={50}
+          required
+        />
+        {errors.code && <div className="error-message">{errors.code}</div>}
+      </label>
+
+      <label>
+        Price:
+        <input
+          type="number"
+          step="0.01"
+          name="price"
+          placeholder="Price"
+          value={formData.price}
+          onChange={handleChange}
+          required
+        />
+      </label>
+
+      <label>
+        Item Type:
+        <select name="itemType" value={formData.itemType} onChange={handleChange} required>
+          <option value="1">Type 1</option>
+          <option value="2">Type 2</option>
+          {/* Add more options as per your ItemType enum */}
+        </select>
+      </label>
+
+      <label>
+        VAT Rate:
+        <input
+          type="number"
+          step="0.01"
+          name="vatRate"
+          placeholder="VAT Rate"
+          value={formData.vatRate}
+          onChange={handleChange}
+          required
+        />
+      </label>
+
+      <label>
+        UOM (Unit of Measurement):
+        <input
+          type="text"
+          name="uom"
+          placeholder="UOM"
+          value={formData.uom}
+          onChange={handleChange}
+          required
+        />
+      </label>
+
+      <button type="submit" className="btn" disabled={Object.keys(errors).length > 0}>Submit</button>
     </form>
   );
 };

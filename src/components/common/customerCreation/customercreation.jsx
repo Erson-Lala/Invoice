@@ -14,13 +14,18 @@ const CustomerCreation = () => {
     setIsModalOpen(false);
   };
 
+  const handleSuccess = () => {
+    alert('Customer created successfully.');
+    handleModalClose();
+  };
+
   return (
     <div className="invoice-creation">
       <button className="btn" onClick={handleModalOpen}>Add New Customer</button>
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={handleModalClose}>
           <AddCustomerForm
-            onSuccess={handleModalClose}
+            onSuccess={handleSuccess}
             onError={(error) => {
               console.error("Error adding new customer:", error);
               alert('Failed to add new customer.');

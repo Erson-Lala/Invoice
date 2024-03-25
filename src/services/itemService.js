@@ -12,6 +12,8 @@ export const fetchItems = async () => {
 
 export const createItem = async (itemData) => {
   try {
+    console.log('Sending item data:', itemData);
+
     const response = await apiInstance.post('/api/Items', itemData);
     return response.data;
   } catch (error) {
@@ -20,8 +22,11 @@ export const createItem = async (itemData) => {
   }
 };
 
+
 export const updateItem = async (id, itemData) => {
   try {
+    console.log('Sending item data:', itemData);
+
     const response = await apiInstance.put(`/api/Items/${id}`, itemData);
     return response.data;
   } catch (error) {
