@@ -1,15 +1,18 @@
 .invoice-list {
-  overflow-x: auto; /* Enables horizontal scrolling */
+  overflow-x: auto;
   margin: 20px 10px;
 
   .top-section {
     display: flex;
+    flex-wrap: wrap; /* Allow items to wrap */
     justify-content: space-evenly;
     align-items: center;
     margin-bottom: 20px;
 
-    .invoice-creation, .customer-total-form {
+    .invoice-creation, .customer-total-form, .customer-creation {
       flex: 1;
+      min-width: 250px; /* Set a minimum width for each section */
+      margin-bottom: 10px; /* Add some space between wrapped items */
     }
   }
 
@@ -43,7 +46,7 @@
       transition: background-color 0.3s;
 
       &:hover {
-        background-color: darken(#007bff, 10%);
+        background-color: #0056b3;
       }
 
       &:focus {
@@ -65,7 +68,7 @@
   table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 600px; /* Minimum table width */
+    min-width: 600px;
 
     thead {
       tr {

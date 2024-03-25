@@ -37,30 +37,32 @@ const CustomerList = () => {
                 ) : error ? (
                     <div style={{ color: 'red' }}>{error}</div>
                 ) : customers.length > 0 ? (
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>City</th>
-                                <th>Country</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {customers.map((customer) => (
-                                <tr key={customer.id}>
-                                    <td>{customer.id}</td>
-                                    <td>{customer.name}</td>
-                                    <td>{customer.email}</td>
-                                    <td>{customer.phone || 'N/A'}</td>
-                                    <td>{customer.city || 'N/A'}</td>
-                                    <td>{customer.country || 'N/A'}</td>
+                    <div className="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>City</th>
+                                    <th>Country</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {customers.map((customer) => (
+                                    <tr key={customer.id}>
+                                        <td>{customer.id}</td>
+                                        <td>{customer.name}</td>
+                                        <td>{customer.email}</td>
+                                        <td>{customer.phone || 'N/A'}</td>
+                                        <td>{customer.city || 'N/A'}</td>
+                                        <td>{customer.country || 'N/A'}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 ) : (
                     <p>No customers found.</p>
                 )}

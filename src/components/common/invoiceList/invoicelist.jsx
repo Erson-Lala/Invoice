@@ -59,7 +59,7 @@ const InvoiceList = () => {
               }
             }}
           />
-          <button onClick={handleCustomerTotal}>Calculate Total</button>
+          <button onClick={handleCustomerTotal}>Calculate</button>
         </div>
 
         <CustomerCreation />
